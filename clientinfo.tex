@@ -1,5 +1,41 @@
-\newcommand{\effectivedate}{November 17, 2022 }
+% This file will contain all the client info and the relevant clause selections for the contract.
+% Read through the entire file and make selections based on the comments. 
 
+
+% Replace the next 2 lines with appropriate information.  The alt address is only needed if the official 
+% mail goes to a different address.
 \newcommand{\clientname}{DUMMY CLIENT}
 \newcommand{\clientaddr}{DUMMY ADDRESS}
 \newcommand{\clientaddralt}{\clientaddr}
+
+
+% Dates
+% Replace the date with the appropriate date.
+\newcommand{\effectivedate}{November 17, 2022}
+
+% Select if the end date is fixed
+% \toggletrue{fixedenddate}
+\togglefalse{fixedenddate}
+\newcommand{\contractenddate}{December 31, 2022}  %enddate and endingdate are already used :(
+
+
+% Retainer 
+% Uncomment one of these lines to select whether the client will need to provide a retainer first.
+% \toggletrue{retainer}
+\togglefalse{retainer}
+
+% Adjust this per what you feel is appropriate
+\newcommand{\retaineramount}{20 hours}
+
+
+% Project Openness:
+% Uncomment one of these lines to designate the openness of the design.  
+% This selects the end portion of the Confidentiality and Proprietary Information section 
+% \togglefalse{opensource}
+\toggletrue{opensource}
+
+
+% TODO: Add toggle for entire agreement section.  This would include separate NDA.
+% NOTE: Technically, toggles are initialized with a false value, so \togglefalse isn't technically 
+% necessary, however, it is useful to explicitly call it out to at least give it a moment of thought
+% before deciding. 

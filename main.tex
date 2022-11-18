@@ -3,18 +3,25 @@
 \geometry{letterpaper, margin=1in}
 \usepackage{indentfirst}
 
+% Conditionals
+\usepackage{etoolbox}
+
+\newtoggle{retainer}
+\newtoggle{opensource}
+\newtoggle{fixedenddate}
+
 % Signature block creation
-\newcommand*{\SignatureAndDate}[2]{%
+\newcommand*{\SignatureAndDate}[2]{
     \vspace{0.3in}
-    \par\noindent\makebox[2.5in]{\hrulefill} \hfill\makebox[2.0in]{\hrulefill}%
-    \par\noindent\makebox[2.5in][l]{#1}      \hfill\makebox[2.0in][l]{Date}%
+    \par\noindent\makebox[2.5in]{\hrulefill} \hfill\makebox[2.0in]{\hrulefill}
+    \par\noindent\makebox[2.5in][l]{#1}      \hfill\makebox[2.0in][l]{Date}
     \vspace{0.3in}
     \par\noindent\makebox[2.5in]{\hrulefill} 
     \par\noindent\makebox[2.5in][l]{Print Signer's Name}  
     \vspace{0.1in}
     \par\noindent\makebox[2.5in][l]{Company Name: #2} 
     \vspace{0.3in} 
-}% 
+}
 
 \title{Consulting Agreement}
 \author{}
@@ -27,11 +34,11 @@
 \section{The Parties}
 This Consulting Agreement ("Agreement") is made effective as of \effectivedate by and between:
 
-\textbf{Consultant}: \consultantname with a mailing address of \consultantaddr ("Consultant"),
+\textbf{Consultant}: \consultantname\ with a mailing address of \consultantaddr\ ("Consultant"),
 
 and
 
-\textbf{Client}: \clientname with a mailing address of \clientaddr
+\textbf{Client}: \clientname\ with a mailing address of \clientaddr\ ("Client").  
 
 \section{Services}
 
@@ -39,11 +46,16 @@ Consultant agrees to provide the following Services: Engineering design services
 
 \section{Term}
 
-The Services shall commence on \effectivedate , and end: (check one)
-
-
+The Services shall commence on \effectivedate, and end
+\iftoggle{fixedenddate}{
+on the date of \contractenddate.
+}
+{
+when termination e-mail is received with 7 days notice.  
+}
 
 \section{Compensation and Payment Method}
+\label{section:compensation}
 In consideration for the Services provided, the consultant will be paid in the following manner.
 \begin{itemize}
     \item Hourly Rate for Engineering is \hourlyrate.
@@ -52,7 +64,13 @@ In consideration for the Services provided, the consultant will be paid in the f
 \end{itemize}
 
 \section{Retainer}
+\iftoggle{retainer}
+{
+The client is required to pay a refundable retainer of \retaineramount\ before the Consultant is able to provide services.
+}
+{
 The client is not required to pay a Retainer before the Consultant is able to provide services.
+}
 
 \section{Expenses}
 \begin{itemize}
@@ -63,7 +81,7 @@ The client is not required to pay a Retainer before the Consultant is able to pr
 \section{Travel}
 The Client agrees to pay travel expenses incurred by the Consultant in execution of Services.  Travel shall be pre-approved by the Client.  
 \begin{itemize}
-    \item Hourly Rate: 50\% of Compensation in Section IV of this document for travel time.
+    \item Hourly Rate: 50\% of Compensation in Section \ref{section:compensation} of this document for travel time.
     \item Per-Diem cost guidelines: \\ https://www.gsa.gov/travel/plan-book/per-diem-rates/ \\ NOTE: The GSA rates are only guidelines due to high variability of costs, and current costs changing faster than the GSA can update their website.  A reasonable effort will be made to adhere to these guidelines.  
 \end{itemize}
 
@@ -132,6 +150,13 @@ Proprietary or confidential information includes, but is not limited to:
 
 Upon termination of the Consultant's Services to the Client, or at the Client's request, the Consultant shall deliver all materials to the Client in the Consultant's possession relating to the Client's business. The Consultant acknowledges any breach or threatened breach of confidentiality under this Agreement will result in irreparable harm to the Client for which damages would be an inadequate remedy. Therefore, the Client shall be entitled to equitable relief, including an injunction, in the event of such breach or threatened breach of confidentiality. Such equitable relief shall be in addition to the Client's rights and remedies otherwise available at law.
 
+\iftoggle{opensource}
+{
+% Open source clause
+The design output of Consultant shall be open-sourced.  This includes reports, design files, softwares, assembly information, and documentation for implementing these.  These will be open-sourced under a license of the Consultant's choosing.  
+}
+{
+% Closed source clause
 Furthermore, proprietary information, under this Agreement, shall include:
 
 \begin{enumerate}
@@ -139,6 +164,7 @@ Furthermore, proprietary information, under this Agreement, shall include:
     \item Consultant hereby assigns to the Client all right, title, and interest in any and all photographic images and videos or audio recordings made by the Client during Consultant's work for them, including, but not limited to, any royalties, proceeds, or other benefits derived from such photographs or recordings; and
     \item The Client will be entitled to use the Consultant's name and/or likeness in advertising and other materials.
 \end{enumerate}
+}
 
 \section{Assignment and Delegation}
 
@@ -163,10 +189,10 @@ None.
 This Agreement, along with any attachments or addendums, represents the entire agreement between the parties. Therefore, this Agreement supersedes any prior agreements, promises, conditions, or understandings between the Client and Consultant. This Agreement may be modified or amended if the amendment is made in writing and is signed by both parties.
 
 \newpage
+
 \section{Signatures}
 
 \textbf{Consultant Signature}
-
 \SignatureAndDate{Company Representative}{\consultantname}
 
 \textbf{Client Signature}
